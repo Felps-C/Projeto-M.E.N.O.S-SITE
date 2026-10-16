@@ -1,0 +1,109 @@
+/* ===== Login e Cadastro ===== */
+.tela-auth {
+  max-width: 412px;
+  margin: 0 auto;
+  padding: 32px 36px 48px;
+  text-align: center;
+}
+.tela-auth h1 { margin: 16px 0 4px; font-size: 1.6rem; color: var(--cor-primaria); }
+.subtitulo { margin: 0 0 28px; color: var(--cor-texto-suave); font-size: 0.95rem; }
+.logo-texto { font-size: 2rem; font-weight: 800; color: var(--cor-primaria); letter-spacing: 3px; padding: 24px 0; }
+
+.tela-auth form { text-align: left; }
+.campo { margin-bottom: 16px; }
+.campo-rotulo { display: block; margin-bottom: 6px; font-size: 0.85rem; font-weight: 500; }
+.campo-caixa { position: relative; }
+.campo input, .campo select {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background: #fff;
+  color: var(--cor-texto);
+  font: inherit;
+  font-size: 0.95rem;
+}
+.campo input:focus, .campo select:focus, .comentar-form textarea:focus {
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: 1px;
+}
+.campo-olho {
+  position: absolute; right: 10px; top: 0; height: 44px;
+  background: none; border: 0; cursor: pointer; color: var(--cor-texto);
+}
+.campo-erro { display: block; margin-top: 4px; color: #C0392B; font-size: 0.8rem; }
+
+.link-coral {
+  display: block; margin: -6px 0 20px auto; padding: 0;
+  background: none; border: 0; cursor: pointer;
+  color: var(--cor-secundaria); font-size: 0.85rem;
+}
+.botao-bloco { display: block; width: 100%; height: 47px; }
+.botao:disabled { opacity: 0.6; cursor: default; }
+.erro-geral { margin: 0 0 14px; padding: 10px 12px; border-radius: 8px; background: #FDECEA; color: #A93226; font-size: 0.9rem; }
+.aviso-info { margin: 0 0 14px; color: var(--cor-texto-suave); font-size: 0.85rem; }
+.rodape-auth { margin-top: 24px; font-size: 0.9rem; }
+
+/* ===== Home do aluno ===== */
+.aluno-cabecalho {
+  display: flex; align-items: center; gap: 12px;
+  padding: 40px 24px 16px; background: #fff;
+}
+.avatar {
+  width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%;
+  background: var(--cor-primaria); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; font-weight: 700;
+}
+.aluno-cabecalho h1 { margin: 0; font-size: 1.15rem; color: var(--cor-primaria); }
+.aluno-cabecalho p { margin: 2px 0 0; font-size: 0.8rem; color: var(--cor-texto-suave); }
+
+.aluno-conteudo { padding: 16px 24px; }
+.aluno-conteudo h2 { margin: 0 0 12px; font-size: 1.1rem; }
+
+.cartao-aluno {
+  background: #fff; border-radius: 16px; padding: 12px; margin-bottom: 16px;
+}
+.cartao-aluno h3 { margin: 12px 0 4px; font-size: 1rem; }
+.foto-prato { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 16px; }
+.detalhe { margin: 0 0 8px; color: var(--cor-texto-suave); font-size: 0.85rem; }
+.aviso-erro { margin: 8px 0 0; color: #A93226; font-size: 0.85rem; }
+
+.acoes { display: flex; gap: 20px; margin-top: 8px; }
+.acao { padding: 4px 0; background: none; border: 0; cursor: pointer; color: var(--cor-primaria); font-size: 0.9rem; }
+.acao.ativa { font-weight: 700; color: var(--cor-secundaria); }
+
+.opcao {
+  position: relative; display: block; width: 100%; margin-top: 10px; padding: 14px 12px;
+  border: 0; border-radius: 10px; overflow: hidden;
+  background: #EEF3F7; color: var(--cor-texto); text-align: left; font: inherit; font-size: 0.9rem; cursor: pointer;
+}
+.opcao:disabled { opacity: 0.6; cursor: default; }
+.opcao.resultado { cursor: default; }
+.opcao.resultado span { position: relative; }
+.barra { position: absolute; inset: 0 auto 0 0; background: rgba(0, 105, 92, 0.18); }
+.ver-mais { text-align: center; margin: 0 0 8px; font-size: 0.9rem; }
+
+/* ===== Comentários (janela que sobe de baixo) ===== */
+.folha-fundo {
+  position: fixed; inset: 0; z-index: 20;
+  display: flex; align-items: flex-end; justify-content: center;
+  background: rgba(26, 37, 44, 0.45);
+}
+.folha {
+  width: 100%; max-width: var(--largura-aluno); max-height: 80vh; overflow-y: auto;
+  padding: 16px 20px 28px; background: #fff; border-radius: 20px 20px 0 0;
+}
+.folha-topo { display: flex; justify-content: space-between; align-items: center; }
+.folha-topo h3 { margin: 0; }
+.folha-fechar { background: none; border: 0; font-size: 1.2rem; cursor: pointer; }
+.comentar-form { display: flex; gap: 8px; margin: 12px 0; }
+.comentar-form textarea {
+  flex: 1; padding: 10px; border: 1px solid var(--cor-borda); border-radius: var(--raio); font: inherit; resize: none;
+}
+.comentarios { list-style: none; margin: 0; padding: 0; }
+.comentarios li { padding: 10px 0; border-top: 1px solid var(--cor-borda); }
+.comentarios p { margin: 4px 0 0; }
+
+.sair-topo { margin-left: auto; background: none; border: 0; cursor: pointer; color: var(--cor-texto-suave); font-size: 0.85rem; }

@@ -1,0 +1,230 @@
+/* Componentes e ajustes visuais conforme o Figma. Vem depois do theme.css, então ajusta o que ele definiu. */
+
+:root {
+  /* Valores exatos do Figma */
+  --cor-menu: #004d40;
+  --cor-borda: #dde4e3;
+  --cor-texto-suave: #5c6b70;
+  --cor-erro: #c0392b;
+  --cor-erro-fundo: #fff1ef;
+  --cor-ok-fundo: #e6f2f0;
+}
+
+/* ===== Botões (Figma: raio 8, altura 44) ===== */
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 22px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13.5px;
+  text-decoration: none;
+}
+.botao:disabled { opacity: 0.6; cursor: not-allowed; }
+.botao.neutro {
+  background: #fff;
+  color: var(--cor-texto);
+  border: 1px solid var(--cor-borda);
+}
+
+/* ===== Menu lateral da escola (Figma: 240px, verde escuro) ===== */
+.menu-lateral { background: var(--cor-menu); }
+.menu-lateral .marca {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+}
+.menu-lateral .marca-logo {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.14);
+  font-size: 16px;
+}
+.menu-lateral a { font-size: 14px; font-weight: 600; }
+.menu-lateral a.active { background: rgba(255, 255, 255, 0.14); }
+.menu-lateral .sair {
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ===== Páginas da escola ===== */
+.pagina { max-width: 1100px; }
+.pagina h1 { margin: 0; font-size: 24px; font-weight: 700; }
+.pagina h2 { margin: 0; font-size: 18px; font-weight: 700; }
+.pagina-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.subtitulo, .suave { color: var(--cor-texto-suave); }
+.subtitulo { margin: 6px 0 0; font-size: 14px; }
+p.suave { font-size: 14px; margin: 6px 0 0; }
+td.suave { font-size: 13px; }
+
+/* ===== Faixas de aviso ===== */
+.mensagem {
+  margin: 0 0 16px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 500;
+}
+.mensagem.erro { background: var(--cor-erro-fundo); color: var(--cor-erro); }
+.mensagem.ok { background: var(--cor-ok-fundo); color: var(--cor-primaria); }
+
+/* ===== Selos de status ===== */
+.selo {
+  display: inline-block;
+  margin: 2px 6px 2px 0;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.selo.alerta { background: var(--cor-erro-fundo); color: var(--cor-erro); }
+.selo.normal { background: var(--cor-ok-fundo); color: var(--cor-primaria); }
+
+/* ===== Busca e tabela ===== */
+.busca {
+  width: 320px;
+  max-width: 100%;
+  height: 40px;
+  margin: 4px 0 20px;
+  padding: 0 14px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--cor-texto);
+  font: inherit;
+  font-size: 13.5px;
+}
+.busca:focus, .campo input:focus { outline: 2px solid rgba(0, 105, 92, 0.35); border-color: var(--cor-primaria); }
+
+.tabela-cartao {
+  background: #fff;
+  border: 1px solid var(--cor-borda);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.tabela-rolagem { overflow-x: auto; }
+.tabela-cartao table { width: 100%; min-width: 760px; border-collapse: collapse; }
+.tabela-cartao th {
+  padding: 17px 19px;
+  border-bottom: 1px solid var(--cor-borda);
+  color: var(--cor-texto-suave);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-align: left;
+  text-transform: uppercase;
+}
+.tabela-cartao td {
+  padding: 16px 19px;
+  border-bottom: 1px solid var(--cor-borda);
+  font-size: 13px;
+  vertical-align: middle;
+}
+.tabela-cartao tbody tr:last-child td { border-bottom: 0; }
+.tabela-cartao td.nome { font-size: 13.5px; font-weight: 500; }
+.tabela-cartao td.vazio { padding: 32px 19px; color: var(--cor-texto-suave); text-align: center; }
+
+.acoes { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+.btn-icone {
+  padding: 4px;
+  border: 0;
+  background: none;
+  color: var(--cor-texto-suave);
+  font-size: 15px;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-icone:hover { color: var(--cor-texto); }
+.btn-texto {
+  padding: 5px 10px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--cor-primaria);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-texto:hover { background: var(--cor-ok-fundo); }
+
+/* ===== Formulários ===== */
+.cartao-form {
+  max-width: 1120px;
+  padding: 32px;
+  background: #fff;
+  border: 1px solid var(--cor-borda);
+  border-radius: 16px;
+}
+.campo { margin-top: 20px; }
+.campo label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 500; }
+.campo input {
+  width: 100%;
+  height: 42px;
+  padding: 0 14px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--cor-texto);
+  font: inherit;
+  font-size: 14px;
+}
+.campo input:disabled { background: var(--cor-fundo); color: var(--cor-texto-suave); cursor: not-allowed; }
+.campo.com-erro input { border-color: var(--cor-erro); }
+.campo .erro-texto { margin: 6px 0 0; color: var(--cor-erro); font-size: 12.5px; }
+.campo .dica { margin: 6px 0 0; color: var(--cor-texto-suave); font-size: 12.5px; }
+.grade-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+.cartao-form .mensagem { margin: 20px 0 0; }
+.acoes-form { display: flex; justify-content: flex-end; gap: 16px; margin-top: 28px; }
+
+/* ===== Janela (modal) ===== */
+.modal-fundo {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(26, 37, 44, 0.45);
+}
+.modal { width: 100%; max-width: 420px; padding: 28px; background: #fff; border-radius: 16px; }
+.modal h2 { margin: 0; font-size: 18px; font-weight: 700; }
+.opcoes-radio { display: flex; gap: 12px; margin-top: 20px; }
+.opcao-radio {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.opcao-radio.ativa { border-color: var(--cor-primaria); background: var(--cor-ok-fundo); }
+.opcao-radio input { accent-color: var(--cor-primaria); }
+
+@media (max-width: 800px) {
+  .grade-2 { grid-template-columns: 1fr; }
+  .cartao-form { padding: 20px; }
+}

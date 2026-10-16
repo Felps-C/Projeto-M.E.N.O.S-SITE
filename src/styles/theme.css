@@ -1,0 +1,116 @@
+:root {
+  --cor-primaria: #00695C;
+  --cor-secundaria: #FF6F61;
+  --cor-fundo: #F4F6F8;
+  --cor-texto: #1A252C;
+  --cor-card: #FFFFFF;
+  --cor-borda: #DDE3E8;
+  --cor-texto-suave: #5B6B76;
+  --raio: 12px;
+  --largura-aluno: 480px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+}
+
+a { color: var(--cor-primaria); }
+
+.botao {
+  display: inline-block;
+  padding: 12px 20px;
+  border: 0;
+  border-radius: var(--raio);
+  background: var(--cor-primaria);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.botao.secundario { background: var(--cor-secundaria); }
+.botao.contorno { background: transparent; color: var(--cor-primaria); border: 1px solid var(--cor-primaria); }
+
+.cartao {
+  background: var(--cor-card);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 16px;
+}
+
+/* ===== Layout do ALUNO (celular, menu inferior) ===== */
+.aluno {
+  max-width: var(--largura-aluno);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: var(--cor-fundo);
+  display: flex;
+  flex-direction: column;
+}
+.aluno main { flex: 1; padding: 0 0 88px; }
+.menu-inferior {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--largura-aluno);
+  display: flex;
+  background: var(--cor-card);
+  border-top: 1px solid var(--cor-borda);
+}
+.menu-inferior a {
+  flex: 1;
+  padding: 22px 0;
+  text-align: center;
+  text-decoration: none;
+  color: var(--cor-texto-suave);
+  font-size: 0.9rem;
+}
+.menu-inferior a.active { color: var(--cor-primaria); font-weight: 700; }
+
+/* ===== Layout da ESCOLA (computador, menu lateral) ===== */
+.escola { display: flex; min-height: 100vh; }
+.menu-lateral {
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--cor-primaria);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 28px 16px;
+}
+.menu-lateral .marca { font-weight: 800; font-size: 1.1rem; margin: 0 0 32px 4px; }
+.menu-lateral a {
+  display: block;
+  padding: 10px 16px;
+  margin-bottom: 4px;
+  border-radius: 8px;
+  color: #fff;
+  text-decoration: none;
+}
+.menu-lateral a.active { background: rgba(255, 255, 255, 0.18); font-weight: 700; }
+.menu-lateral .sair {
+  margin-top: auto;
+  background: none;
+  border: 0;
+  color: #fff;
+  text-align: left;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.escola main { flex: 1; padding: 40px; min-width: 0; }
+
+/* Em telas estreitas o menu lateral da escola vira uma barra no topo */
+@media (max-width: 800px) {
+  .escola { flex-direction: column; }
+  .menu-lateral { width: 100%; flex-direction: row; flex-wrap: wrap; align-items: center; padding: 12px; gap: 4px; }
+  .menu-lateral .marca { margin: 0 12px 0 4px; }
+  .menu-lateral .sair { margin: 0 0 0 auto; }
+  .escola main { padding: 20px; }
+}
