@@ -107,3 +107,81 @@
 .comentarios p { margin: 4px 0 0; }
 
 .sair-topo { margin-left: auto; background: none; border: 0; cursor: pointer; color: var(--cor-texto-suave); font-size: 0.85rem; }
+
+/* ===== Páginas simples do aluno (Enquetes, Saúde e Alergias) ===== */
+.aluno-pagina { padding: 40px 24px 16px; }
+.aluno-pagina h1 { margin: 0; font-size: 1.4rem; color: var(--cor-texto); }
+.aluno-pagina-sub { margin: 4px 0 24px; color: var(--cor-texto-suave); font-size: 0.9rem; }
+
+/* Enquetes do aluno */
+.enquete-card {
+  margin-bottom: 16px; padding: 14px 16px; background: #fff;
+  border: 1px solid var(--cor-borda); border-radius: 16px;
+}
+.enquete-prato { margin: 0 0 2px; color: var(--cor-texto-suave); font-size: 0.8rem; }
+.enquete-pergunta { margin: 0 0 14px; font-size: 1rem; }
+.enquete-opcao {
+  display: block; width: 100%; margin-top: 8px; padding: 10px 14px;
+  background: #fff; border: 1px solid var(--cor-borda); border-radius: 10px;
+  color: var(--cor-texto); font: inherit; font-size: 0.9rem; text-align: left; cursor: pointer;
+}
+.enquete-opcao:hover:not(:disabled) { border-color: var(--cor-primaria); background: #E6F2F0; }
+.enquete-opcao:disabled { opacity: 0.6; cursor: default; }
+.enquete-resultado { margin-top: 12px; }
+.enquete-resultado-linha { display: flex; gap: 12px; margin-bottom: 6px; font-size: 0.9rem; }
+.enquete-trilho { height: 6px; border-radius: 3px; background: #DFE5E4; overflow: hidden; }
+.enquete-preenche { height: 100%; border-radius: 3px; background: var(--cor-primaria); }
+.enquete-total { margin: 12px 0 0; color: var(--cor-texto-suave); font-size: 0.8rem; }
+
+/* Saúde e Alergias */
+.item-saude {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 8px; padding: 14px 16px;
+  background: #fff; border: 1px solid var(--cor-borda); border-radius: 12px;
+  font-size: 0.95rem; cursor: pointer;
+}
+.item-saude.marcado { border-color: var(--cor-primaria); background: #E6F2F0; }
+.item-saude input { width: 20px; height: 20px; flex-shrink: 0; accent-color: var(--cor-primaria); }
+.saude-obs { display: block; margin: 20px 0 20px; }
+.saude-obs-rotulo { display: block; margin-bottom: 6px; font-size: 0.85rem; font-weight: 500; }
+.saude-obs textarea {
+  width: 100%; padding: 12px 14px; border: 1px solid var(--cor-borda); border-radius: 12px;
+  background: #fff; color: var(--cor-texto); font: inherit; font-size: 0.9rem; resize: vertical;
+}
+.saude-obs textarea:focus { outline: 2px solid var(--cor-primaria); outline-offset: 1px; }
+
+/* ===== Perfil do aluno ===== */
+.perfil { padding-top: 50px; text-align: center; }
+.perfil-avatar {
+  width: 64px; height: 64px; margin: 0 auto; border-radius: 50%;
+  background: var(--cor-primaria); color: #fff;
+  display: flex; align-items: center; justify-content: center; font-size: 1.6rem; font-weight: 700;
+}
+.perfil h1.perfil-nome { margin: 14px 0 2px; font-size: 1.15rem; }
+.perfil-matricula { margin: 0; color: var(--cor-texto-suave); font-size: 0.85rem; }
+.perfil-stats { display: flex; gap: 24px; margin: 28px 0 24px; }
+.perfil-stat {
+  flex: 1; padding: 16px 12px; background: #fff;
+  border: 1px solid var(--cor-borda); border-radius: 16px;
+}
+.perfil-stat strong { display: block; font-size: 1.3rem; color: var(--cor-primaria); }
+.perfil-stat span { display: block; margin-top: 4px; color: var(--cor-texto-suave); font-size: 0.8rem; }
+.perfil-menu { text-align: left; }
+.perfil-opcao {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  width: 100%; margin-bottom: 8px; padding: 16px; background: #fff;
+  border: 1px solid var(--cor-borda); border-radius: 12px;
+  color: var(--cor-texto); font: inherit; font-size: 0.95rem; text-align: left; text-decoration: none; cursor: pointer;
+}
+.perfil-opcao:hover:not(:disabled) { border-color: var(--cor-primaria); }
+.perfil-opcao.desativada { color: var(--cor-texto-suave); cursor: default; }
+.perfil-breve { margin-left: auto; padding: 2px 8px; border-radius: 999px; background: var(--cor-fundo); font-size: 0.7rem; }
+.perfil-seta { color: var(--cor-texto-suave); font-size: 1.2rem; transition: transform 0.15s; }
+.perfil-seta.aberta { transform: rotate(90deg); }
+.perfil-info {
+  display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; margin: -2px 0 8px; padding: 14px 16px;
+  background: #fff; border: 1px solid var(--cor-borda); border-radius: 12px; font-size: 0.85rem;
+}
+.perfil-info dt { color: var(--cor-texto-suave); }
+.perfil-info dd { margin: 0; word-break: break-all; }
+.perfil-sair { display: block; margin: 16px 0 0; padding: 0; background: none; border: 0; cursor: pointer; color: #C0392B; font: inherit; font-size: 0.95rem; }
+.perfil-cancelar { display: block; margin-top: 14px; text-align: center; color: var(--cor-texto-suave); font-size: 0.9rem; }

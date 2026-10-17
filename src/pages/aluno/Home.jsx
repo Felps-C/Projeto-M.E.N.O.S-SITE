@@ -8,7 +8,7 @@ import { hojeISO, inicial } from '../../utils.js';
 
 // Home do aluno: cardápio de hoje + enquete aberta (igual ao Figma).
 export default function Home() {
-  const { sessao, logout } = useAuth();
+  const { sessao } = useAuth();
   const [cardapios, setCardapios] = useState(null);
   const [enquetes, setEnquetes] = useState([]);
   const [erro, setErro] = useState('');
@@ -35,8 +35,6 @@ export default function Home() {
           <h1>Olá, {sessao.nome}!</h1>
           <p>Confira o cardápio e as enquetes de hoje</p>
         </div>
-        {/* Provisório: o "Sair" definitivo ficará na tela de Perfil */}
-        <button type="button" className="sair-topo" onClick={logout}>Sair</button>
       </header>
 
       <div className="aluno-conteudo">

@@ -11,16 +11,17 @@ function Olho({ aberto }) {
 }
 
 // Campo com rótulo, mensagem de erro e (se tipo="senha") botão de mostrar/ocultar.
-export default function Campo({ rotulo, tipo = 'text', erro, ...props }) {
+export default function Campo({ rotulo, tipo, type, erro, dica, ...props }) {
   const [visivel, setVisivel] = useState(false);
-  const ehSenha = tipo === 'senha';
+  const tipoCampo = tipo ?? type ?? 'text'; // aceita tipo="date" e também type="date"
+  const ehSenha = tipoCampo === 'senha';
 
   return (
-    <div className="campo">
+    <div className={`campo${erro ? ' com-erro' : ''}`}>
       <label>
         <span className="campo-rotulo">{rotulo}</span>
         <div className="campo-caixa">
-          <input {...props} type={ehSenha ? (visivel ? 'text' : 'password') : tipo} />
+          <input {...props} type={ehSenha ? (visivel ? 'text' : 'password') : tipoCampo} />
           {ehSenha && (
             <button
               type="button"
@@ -34,6 +35,7 @@ export default function Campo({ rotulo, tipo = 'text', erro, ...props }) {
         </div>
       </label>
       {erro && <span className="campo-erro">{erro}</span>}
+      {!erro && dica && <span className="campo-dica">{dica}</span>}
     </div>
   );
 }

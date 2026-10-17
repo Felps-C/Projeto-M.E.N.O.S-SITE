@@ -6,7 +6,12 @@ import EmConstrucao from './pages/EmConstrucao.jsx';
 import Login from './pages/Login.jsx';
 import Cadastro from './pages/Cadastro.jsx';
 import Home from './pages/aluno/Home.jsx';
+import EnquetesAluno from './pages/aluno/Enquetes.jsx';
+import Saude from './pages/aluno/Saude.jsx';
+import Perfil from './pages/aluno/Perfil.jsx';
+import EditarPerfil from './pages/aluno/EditarPerfil.jsx';
 import CriarCardapio from './pages/escola/CriarCardapio.jsx';
+import EnquetesEscola from './pages/escola/Enquetes.jsx';
 import Estoque from './pages/escola/Estoque.jsx';
 import ProdutoForm from './pages/escola/ProdutoForm.jsx';
 import Relatorios from './pages/escola/Relatorios.jsx';
@@ -21,10 +26,10 @@ export default function App() {
       {/* Aluno */}
       <Route path="/aluno" element={<RotaProtegida tipo="aluno"><AlunoLayout /></RotaProtegida>}>
         <Route index element={<Home />} />
-        <Route path="enquetes" element={<EmConstrucao titulo="Enquetes" />} />
-        <Route path="perfil" element={<EmConstrucao titulo="Perfil" />} />
-        <Route path="perfil/editar" element={<EmConstrucao titulo="Editar perfil" />} />
-        <Route path="saude" element={<EmConstrucao titulo="Saúde e Alergias" />} />
+        <Route path="enquetes" element={<EnquetesAluno />} />
+        <Route path="perfil" element={<Perfil />} />
+        <Route path="perfil/editar" element={<EditarPerfil />} />
+        <Route path="saude" element={<Saude />} />
       </Route>
 
       {/* Escola */}
@@ -34,7 +39,7 @@ export default function App() {
         <Route path="estoque/novo" element={<ProdutoForm />} />
         <Route path="estoque/:produtoId/editar" element={<ProdutoForm />} />
         <Route path="cardapio" element={<CriarCardapio />} />
-        <Route path="enquetes" element={<EmConstrucao titulo="Enquetes" />} />
+        <Route path="enquetes" element={<EnquetesEscola />} />
         <Route path="relatorios" element={<Relatorios />} />
       </Route>
 

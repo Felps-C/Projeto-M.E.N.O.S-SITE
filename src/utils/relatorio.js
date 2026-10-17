@@ -31,7 +31,7 @@ export function opcaoLider(enquete) {
 // Aspas e ";" para o Excel (configuração brasileira) abrir as colunas certinhas.
 const celula = (valor) => `"${String(valor ?? '').replace(/"/g, '""')}"`;
 
-export function relatorioParaCsv(relatorio) {
+export function relatorioParaCsv(relatorio, restricoes) {
   const linhas = [
     ['Relatório M.E.N.O.S'],
     ['Enquetes no período', relatorio.totalEnquete],
@@ -51,6 +51,14 @@ export function relatorioParaCsv(relatorio) {
         String(Math.round(opcao.percentual * 10) / 10).replace('.', ','),
       ]);
     }
+  }
+  if (restricoes && restricoes.total > 0) {
+    linhas.push([], ['Restrição / Alergia', 'Alunos', 'Proporção (%)']);
+    for (const l of restricoes.linhas) linhas.push([l.restricao, l.alunos, l.percentual]);
+    if (restricoes.comObservacao > 0) {
+      linhas.push(['Outras observações', restricoes.comObservacao, restricoes.percentual(restricoes.comObservacao)]);
+    }
+    linhas.push(['Total de alunos', restricoes.total, ''], ['Alunos que preencheram a ficha', restricoes.preencheram, '']);
   }
   // BOM no começo: sem ele o Excel mostra os acentos errados.
   return '﻿' + linhas.map((l) => l.map(celula).join(';')).join('\r\n');

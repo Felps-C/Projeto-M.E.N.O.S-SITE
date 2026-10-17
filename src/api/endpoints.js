@@ -60,3 +60,22 @@ export async function publicarPrato(escolaId, { nome, tipoRefeicao, descricao, d
     throw erro;
   }
 }
+
+// ---- Estudante: perfil e "Saúde e Alergias" (EstudanteController) ----
+export const buscarEstudante = (id) => api.get(`/estudantes/${id}`);
+// O PUT exige o cadastro inteiro (nome, e-mail, matrícula, escolaId). Sem "senha", a senha atual é mantida.
+export const atualizarEstudante = (id, dados) => api.put(`/estudantes/${id}`, dados);
+
+// ---- Escola: enquetes (EnqueteController) ----
+export const listarEnquetesDaEscola = (escolaId) => api.get(`/enquetes/escola/${escolaId}`);
+export const criarEnquete = (escolaId, dados) => api.post(`/enquetes/escola/${escolaId}`, dados);
+export const abrirEnquete = (enqueteId) => api.post(`/enquetes/${enqueteId}/abrir`);
+export const fecharEnquete = (enqueteId) => api.post(`/enquetes/${enqueteId}/fechar`);
+// Pratos da escola, para escolher o "Prato vinculado" da enquete.
+export const listarPratosDaEscola = (escolaId) => api.get(`/merendas/escola/${escolaId}`);
+
+// Alunos da escola (usado no relatório de restrições alimentares; o front só conta, não exibe nomes).
+export const listarEstudantesDaEscola = (escolaId) => api.get(`/estudantes?escolaId=${escolaId}`);
+
+// Comentários de uma escola inteira (a tela de Perfil conta os do próprio aluno).
+export const listarComentariosDaEscola = (escolaId) => api.get(`/feedbacks?escolaId=${escolaId}`);

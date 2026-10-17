@@ -26,6 +26,7 @@ export default function Cadastro() {
   const [erros, setErros] = useState({});
   const [erroGeral, setErroGeral] = useState('');
   const [enviando, setEnviando] = useState(false);
+  const [recemCadastrado, setRecemCadastrado] = useState(false);
 
   useEffect(() => {
     listarEscolas()
@@ -33,7 +34,11 @@ export default function Cadastro() {
       .catch((e) => setErroGeral(e.message));
   }, []);
 
-  if (sessao) return <Navigate to={sessao.tipo === 'escola' ? '/escola/estoque' : '/aluno'} replace />;
+  if (sessao) {
+    // Quem acabou de criar a conta preenche "Saúde e Alergias" antes de ir para a Home.
+    const destino = sessao.tipo === 'escola' ? '/escola/estoque' : recemCadastrado ? '/aluno/saude' : '/aluno';
+    return <Navigate to={destino} replace />;
+  }
 
   const mudar = (campo) => (evento) => setForm((f) => ({ ...f, [campo]: evento.target.value }));
 
@@ -54,6 +59,7 @@ export default function Cadastro() {
         escolaId: Number(form.escolaId),
       });
       // Conta criada: já entra no sistema.
+      setRecemCadastrado(true);
       login({ tipo: 'aluno', id: estudante.id, escolaId: estudante.escolaId, nome: estudante.nome });
     } catch (e) {
       setErroGeral(e.message);

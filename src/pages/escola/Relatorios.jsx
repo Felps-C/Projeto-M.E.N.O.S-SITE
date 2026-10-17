@@ -1,8 +1,10 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { listarEstudantesDaEscola } from '../../api/endpoints.js';
 import { gerarRelatorio, listarRelatorios } from '../../api/relatorios.js';
 import Mensagem from '../../components/Mensagem.jsx';
 import PaginaTopo from '../../components/PaginaTopo.jsx';
 import { useAuth } from '../../context/AuthContext.jsx';
+import { contarRestricoes } from '../../utils/alergias.js';
 import { formatarData } from '../../utils/formatar.js';
 import { baixarArquivo, intervaloDoPeriodo, opcaoLider, PERIODOS, relatorioParaCsv } from '../../utils/relatorio.js';
 
@@ -34,6 +36,20 @@ export default function Relatorios() {
   const [carregando, setCarregando] = useState(true);
   const [gerando, setGerando] = useState(false);
   const [erro, setErro] = useState('');
+  const [estudantes, setEstudantes] = useState(null);
+  const [erroRestricoes, setErroRestricoes] = useState('');
+
+  // Restrições alimentares: são os dados atuais dos alunos, não dependem do período do relatório.
+  useEffect(() => {
+    let ativo = true;
+    listarEstudantesDaEscola(escolaId)
+      .then((lista) => ativo && setEstudantes(lista))
+      .catch((falha) => ativo && setErroRestricoes(falha.message));
+    return () => {
+      ativo = false;
+    };
+  }, [escolaId]);
+  const restricoes = useMemo(() => (estudantes ? contarRestricoes(estudantes) : null), [estudantes]);
 
   // Ao abrir a tela mostra o relatório mais recente já gerado (não cria um novo a cada visita).
   useEffect(() => {
@@ -65,7 +81,7 @@ export default function Relatorios() {
   }, [escolaId, periodo]);
 
   const exportarExcel = () =>
-    baixarArquivo('relatorio-menos.csv', relatorioParaCsv(relatorio), 'text/csv;charset=utf-8');
+    baixarArquivo('relatorio-menos.csv', relatorioParaCsv(relatorio, restricoes), 'text/csv;charset=utf-8');
   const exportarPdf = () => window.print(); // no diálogo de impressão, escolha "Salvar como PDF"
 
   const enquetes = relatorio?.enquetes ?? [];
@@ -180,15 +196,67 @@ export default function Relatorios() {
             )}
           </section>
 
-          <section className="tabela-cartao">
-            <h2 className="cartao-titulo">Em breve</h2>
-            <p className="vazio-relatorio">
-              Aceitação por prato, aceitação ao longo da semana e restrições alimentares dos alunos aparecem do
-              Figma, mas o backend ainda não calcula esses dados.
-            </p>
-          </section>
         </>
       )}
+
+      <section className="tabela-cartao restricoes">
+        <h2 className="cartao-titulo">Restrições alimentares e alergias dos alunos</h2>
+        {erroRestricoes ? (
+          <p className="vazio-relatorio">{erroRestricoes}</p>
+        ) : !restricoes ? (
+          <p className="vazio-relatorio">Carregando…</p>
+        ) : restricoes.total === 0 ? (
+          <p className="vazio-relatorio">Nenhum aluno cadastrado nesta escola ainda.</p>
+        ) : (
+          <>
+            <p className="restricoes-info suave">
+              {restricoes.preencheram} de {restricoes.total} {restricoes.total === 1 ? 'aluno preencheu' : 'alunos preencheram'} a
+              ficha de Saúde e Alergias. A proporção é calculada sobre todos os alunos da escola.
+            </p>
+            <div className="tabela-rolagem">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Restrição / Alergia</th>
+                    <th>Alunos</th>
+                    <th>Proporção</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {restricoes.linhas.map((l) => (
+                    <tr key={l.restricao}>
+                      <td className="nome">{l.restricao}</td>
+                      <td className="suave">{l.alunos} {l.alunos === 1 ? 'aluno' : 'alunos'}</td>
+                      <td>
+                        <div className="aceitacao">
+                          <Barra percentual={l.percentual} />
+                          <span>{l.percentual}%</span>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                  {restricoes.comObservacao > 0 && (
+                    <tr>
+                      <td className="nome">Outras observações informadas</td>
+                      <td className="suave">{restricoes.comObservacao} {restricoes.comObservacao === 1 ? 'aluno' : 'alunos'}</td>
+                      <td>
+                        <div className="aceitacao">
+                          <Barra percentual={restricoes.percentual(restricoes.comObservacao)} />
+                          <span>{restricoes.percentual(restricoes.comObservacao)}%</span>
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )}
+      </section>
+
+      <p className="suave relatorio-info">
+        Em breve: aceitação por prato e ao longo da semana (o backend ainda não calcula esses dados).
+      </p>
     </div>
   );
 }

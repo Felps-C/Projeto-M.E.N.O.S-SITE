@@ -6,6 +6,7 @@ import { AuthProvider } from './context/AuthContext.jsx';
 import './styles/theme.css';
 import './styles/aluno.css';
 import './styles/escola.css';
+import './styles/componentes.css'; // por último: ajustes do Figma (botões, tabelas, formulários da escola)
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

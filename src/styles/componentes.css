@@ -112,7 +112,7 @@ td.suave { font-size: 13px; }
   font: inherit;
   font-size: 13.5px;
 }
-.busca:focus, .campo input:focus { outline: 2px solid rgba(0, 105, 92, 0.35); border-color: var(--cor-primaria); }
+.busca:focus, .escola .campo input:focus { outline: 2px solid rgba(0, 105, 92, 0.35); border-color: var(--cor-primaria); }
 
 .tabela-cartao {
   background: #fff;
@@ -175,9 +175,11 @@ td.suave { font-size: 13px; }
   border: 1px solid var(--cor-borda);
   border-radius: 16px;
 }
-.campo { margin-top: 20px; }
-.campo label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 500; }
-.campo input {
+.escola .campo { margin-top: 20px; margin-bottom: 0; }
+.escola .campo label { display: block; font-size: 13px; font-weight: 500; }
+.escola .campo-rotulo { margin-bottom: 8px; font-size: 13px; }
+.escola .campo > label[for] { margin-bottom: 8px; } /* rótulos soltos acima do campo */
+.escola .campo input {
   width: 100%;
   height: 42px;
   padding: 0 14px;
@@ -188,13 +190,17 @@ td.suave { font-size: 13px; }
   font: inherit;
   font-size: 14px;
 }
-.campo input:disabled { background: var(--cor-fundo); color: var(--cor-texto-suave); cursor: not-allowed; }
-.campo.com-erro input { border-color: var(--cor-erro); }
-.campo .erro-texto { margin: 6px 0 0; color: var(--cor-erro); font-size: 12.5px; }
-.campo .dica { margin: 6px 0 0; color: var(--cor-texto-suave); font-size: 12.5px; }
+.escola .campo input:disabled { background: var(--cor-fundo); color: var(--cor-texto-suave); cursor: not-allowed; }
+.escola .campo.com-erro input { border-color: var(--cor-erro); }
+.escola .campo .erro-texto, .escola .campo-erro { margin: 6px 0 0; color: var(--cor-erro); font-size: 12.5px; }
+.escola .campo .dica, .escola .campo-dica { margin: 6px 0 0; color: var(--cor-texto-suave); font-size: 12.5px; }
 .grade-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
 .cartao-form .mensagem { margin: 20px 0 0; }
-.acoes-form { display: flex; justify-content: flex-end; gap: 16px; margin-top: 28px; }
+.escola .campo-erro, .escola .campo-dica { display: block; margin: 6px 0 0; font-size: 12.5px; }
+.escola .campo-dica { color: var(--cor-texto-suave); }
+.cartao-form .acoes-form { display: flex; justify-content: flex-end; gap: 16px; margin-top: 28px; }
+.cartao-form .acoes-form .botao { min-height: 46px; min-width: 130px; }
+.cartao-form .acoes-form .botao:last-child { min-width: 190px; } /* "Salvar"/"Criar" (190px no Figma) */
 
 /* ===== Janela (modal) ===== */
 .modal-fundo {

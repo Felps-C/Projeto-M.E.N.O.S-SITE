@@ -150,7 +150,6 @@ export default function ProdutoForm() {
                 value={valores.estoqueMinimo}
                 onChange={alterar('estoqueMinimo')}
                 erro={erros.estoqueMinimo}
-                dica={'Quando o estoque chegar nesse valor, o produto aparece como "Estoque baixo".'}
               />
             </div>
 
