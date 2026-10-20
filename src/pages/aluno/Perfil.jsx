@@ -30,7 +30,7 @@ export default function Perfil() {
       .then((dados) => ativo && setEstudante(dados))
       .catch(() => {}); // sem os dados extras a tela continua útil com o que está na sessão
     listarComentariosDaEscola(sessao.escolaId)
-      .then((lista) => ativo && setComentarios(lista.filter((c) => c.estudante?.id === sessao.id).length))
+      .then((lista) => ativo && setComentarios(lista.filter((c) => (c.estudanteId ?? c.estudante?.id) === sessao.id).length))
       .catch(() => {});
     return () => {
       ativo = false;

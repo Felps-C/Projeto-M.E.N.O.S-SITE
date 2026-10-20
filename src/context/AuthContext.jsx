@@ -1,8 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 
-// SESSÃO PROVISÓRIA: guarda quem está usando o sistema ({ tipo, id, escolaId, nome }).
-// Quando o login do backend ficar pronto, só a função login() muda:
-// ela passa a receber a resposta da API (com token) em vez de dados de teste.
+// Guarda quem está usando o sistema ({ tipo, id, escolaId, nome }) e o token do login.
+// O token fica separado ("menos_token") e o api/client.js o envia em toda chamada à API.
 const AuthContext = createContext(null);
 const CHAVE = 'menos_sessao';
 
@@ -17,7 +16,10 @@ function lerSessao() {
 export function AuthProvider({ children }) {
   const [sessao, setSessao] = useState(lerSessao);
 
-  const login = (dados) => {
+  // Recebe a resposta do login ({ tipo, id, escolaId, nome, token }).
+  // Sem "token" (ex.: só trocar o nome depois de editar o perfil), mantém o token que já existe.
+  const login = ({ token, ...dados }) => {
+    if (token) localStorage.setItem('menos_token', token);
     setSessao(dados);
     localStorage.setItem(CHAVE, JSON.stringify(dados));
   };

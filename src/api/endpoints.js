@@ -79,3 +79,18 @@ export const listarEstudantesDaEscola = (escolaId) => api.get(`/estudantes?escol
 
 // Comentários de uma escola inteira (a tela de Perfil conta os do próprio aluno).
 export const listarComentariosDaEscola = (escolaId) => api.get(`/feedbacks?escolaId=${escolaId}`);
+
+// Cadastro de escola: { nome, email, senha, cnpj }
+export const cadastrarEscola = (dados) => api.post('/escolas', dados);
+
+// ---- Escola: gerenciar o cardápio já publicado (listar, editar, ocultar, excluir) ----
+// Cada item da lista é um cardápio (uma data) com seus pratos em "merendas".
+export const listarCardapiosDaEscola = (escolaId) => api.get(`/cardapios/escola/${escolaId}`);
+// O PUT do prato troca nome, descrição, tipo e quantidade; por isso reenviamos a quantidade que já existe.
+export const atualizarPrato = (merendaId, dados) => api.put(`/merendas/${merendaId}`, dados);
+// O PUT do cardápio substitui data, situação (ativa) e a lista de pratos.
+export const atualizarCardapio = (menuId, dados) => api.put(`/cardapios/${menuId}`, dados);
+export const tirarPratoDoCardapio = (menuId, merendaId) => api.delete(`/cardapios/${menuId}/merendas/${merendaId}`);
+export const excluirCardapio = (menuId) => api.delete(`/cardapios/${menuId}`);
+// Foto do prato (404 quando o prato não tem foto). O "v" muda depois de trocar a foto, para o navegador recarregar.
+export const urlImagemPrato = (merendaId, v = 0) => api.url(`/merendas/${merendaId}/imagem?v=${v}`);

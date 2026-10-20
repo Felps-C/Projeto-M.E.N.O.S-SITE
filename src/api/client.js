@@ -1,7 +1,7 @@
 // Único lugar que conhece o endereço da API.
 // Em desenvolvimento usa "/api" (proxy do Vite). Em produção, defina VITE_API_URL.
-const BASE = import.meta.env.VITE_API_URL ?? '/api';
-
+//const BASE = 'http://192.168.1.8:8080'
+const BASE = '/api';
 export class ApiError extends Error {
   constructor(message, status) {
     super(message);
@@ -13,7 +13,7 @@ async function request(path, { method = 'GET', body, form } = {}) {
   const headers = {};
   const options = { method, headers };
 
-  // Quando o login do backend existir, o token entra aqui automaticamente.
+  // Token do login: o backend recusa (401) qualquer chamada sem ele, exceto login e cadastros.
   const token = localStorage.getItem('menos_token');
   if (token) headers.Authorization = `Bearer ${token}`;
 
@@ -29,6 +29,13 @@ async function request(path, { method = 'GET', body, form } = {}) {
     resposta = await fetch(`${BASE}${path}`, options);
   } catch {
     throw new ApiError('Não foi possível conectar ao servidor. Tente novamente.', 0);
+  }
+
+  if (resposta.status === 401 && path !== '/login') {
+    // Sessão vencida (ou token inválido): limpa tudo e volta para o login.
+    localStorage.removeItem('menos_sessao');
+    localStorage.removeItem('menos_token');
+    window.location.assign('/login');
   }
 
   if (!resposta.ok) {

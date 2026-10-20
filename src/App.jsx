@@ -5,6 +5,7 @@ import RotaProtegida from './components/RotaProtegida.jsx';
 import EmConstrucao from './pages/EmConstrucao.jsx';
 import Login from './pages/Login.jsx';
 import Cadastro from './pages/Cadastro.jsx';
+import CadastroEscola from './pages/CadastroEscola.jsx';
 import Home from './pages/aluno/Home.jsx';
 import EnquetesAluno from './pages/aluno/Enquetes.jsx';
 import Saude from './pages/aluno/Saude.jsx';
@@ -22,6 +23,7 @@ export default function App() {
       {/* Públicas */}
       <Route path="/login" element={<Login />} />
       <Route path="/cadastro" element={<Cadastro />} />
+      <Route path="/cadastro/escola" element={<CadastroEscola />} />
 
       {/* Aluno */}
       <Route path="/aluno" element={<RotaProtegida tipo="aluno"><AlunoLayout /></RotaProtegida>}>

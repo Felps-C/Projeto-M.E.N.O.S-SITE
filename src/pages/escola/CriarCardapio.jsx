@@ -3,6 +3,7 @@ import Campo from '../../components/Campo.jsx';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { publicarPrato } from '../../api/endpoints.js';
 import { formatarData, hojeISO } from '../../utils.js';
+import ListaPratos from './ListaPratos.jsx';
 
 const REFEICOES = ['Café da manhã', 'Lanche', 'Almoço', 'Jantar'];
 const LIMITE_FOTO = 10 * 1024 * 1024; // mesmo limite de upload do backend (10 MB)
@@ -19,6 +20,7 @@ export default function CriarCardapio() {
   const [erroGeral, setErroGeral] = useState('');
   const [sucesso, setSucesso] = useState('');
   const [enviando, setEnviando] = useState(false);
+  const [versao, setVersao] = useState(0); // muda quando um prato é publicado, para a lista recarregar
 
   // Cria (e depois libera) o endereço temporário usado na pré-visualização da foto.
   useEffect(() => {
@@ -85,6 +87,7 @@ export default function CriarCardapio() {
       // Limpa o prato, mas mantém a data para cadastrar vários pratos seguidos.
       setForm((f) => ({ ...novoForm(), dataInicio: f.dataInicio, tipoRefeicao: f.tipoRefeicao }));
       setArquivo(null);
+      setVersao((v) => v + 1);
     } catch (e) {
       setErroGeral(e.message);
     } finally {
@@ -175,6 +178,8 @@ export default function CriarCardapio() {
           </button>
         </div>
       </form>
+
+      <ListaPratos recarregar={versao} />
     </div>
   );
 }

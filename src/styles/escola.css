@@ -125,3 +125,19 @@
 /* Restrições alimentares (relatório) */
 .restricoes { margin-top: 20px; }
 .restricoes-info { margin: 0; padding: 14px 19px 0; font-size: 13px; }
+
+/* ===== Pratos publicados (Cardápio) ===== */
+.lista-pratos { margin-top: 32px; max-width: 1120px; }
+.lista-pratos-topo { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-right: 20px; }
+.lista-pratos .mensagem { margin: 0 20px 12px; }
+.prato-celula { display: flex; align-items: center; gap: 12px; }
+.prato-miniatura { width: 44px; height: 44px; flex-shrink: 0; border-radius: 8px; object-fit: cover; background: var(--cor-fundo); }
+.prato-miniatura.vazia { display: flex; align-items: center; justify-content: center; color: var(--cor-texto-suave); }
+.prato-descricao { max-width: 360px; margin-top: 2px; font-size: 12.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.upload-pequeno img { max-height: 140px; }
+.acoes-modal { display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px; }
+.modal-fundo .modal { max-height: 92vh; overflow-y: auto; }
+.modal textarea { width: 100%; min-height: 70px; padding: 10px 14px; border: 1px solid var(--cor-borda); border-radius: 8px; font: inherit; font-size: 14px; resize: vertical; }
+.lista-pratos-topo { border-bottom: 1px solid var(--cor-borda); }
+.lista-pratos-topo .cartao-titulo { border-bottom: 0; }
+.lista-pratos .mensagem { margin-top: 12px; }

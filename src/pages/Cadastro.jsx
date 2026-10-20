@@ -3,7 +3,7 @@ import { Link, Navigate } from 'react-router-dom';
 import Campo from '../components/Campo.jsx';
 import Logo from '../components/Logo.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
-import { cadastrarEstudante, listarEscolas } from '../api/endpoints.js';
+import { cadastrarEstudante, entrar, listarEscolas } from '../api/endpoints.js';
 
 const VAZIO = { escolaId: '', nome: '', matriculaEscolar: '', email: '', senha: '', confirmar: '' };
 
@@ -51,16 +51,17 @@ export default function Cadastro() {
 
     setEnviando(true);
     try {
-      const estudante = await cadastrarEstudante({
+      await cadastrarEstudante({
         nome: form.nome.trim(),
         email: form.email.trim(),
         senha: form.senha,
         matriculaEscolar: form.matriculaEscolar.trim(),
         escolaId: Number(form.escolaId),
       });
-      // Conta criada: já entra no sistema.
+      // Conta criada: já entra no sistema (o login devolve o token que a API exige).
+      const dados = await entrar(form.email.trim(), form.senha);
       setRecemCadastrado(true);
-      login({ tipo: 'aluno', id: estudante.id, escolaId: estudante.escolaId, nome: estudante.nome });
+      login(dados);
     } catch (e) {
       setErroGeral(e.message);
       setEnviando(false);
@@ -105,6 +106,11 @@ export default function Cadastro() {
       <p className="rodape-auth">
         Já tem conta? <Link to="/login">Faça login</Link>
       </p>
+
+      <div className="troca-cadastro">
+        <span>É uma escola?</span>
+        <Link to="/cadastro/escola" className="botao contorno">Cadastrar minha escola</Link>
+      </div>
     </div>
   );
 }

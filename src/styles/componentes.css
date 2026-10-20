@@ -11,7 +11,7 @@
 }
 
 /* ===== Botões (Figma: raio 8, altura 44) ===== */
-.botao {
+.escola .botao {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -22,8 +22,8 @@
   font-size: 13.5px;
   text-decoration: none;
 }
-.botao:disabled { opacity: 0.6; cursor: not-allowed; }
-.botao.neutro {
+.escola .botao:disabled { opacity: 0.6; cursor: not-allowed; }
+.escola .botao.neutro {
   background: #fff;
   color: var(--cor-texto);
   border: 1px solid var(--cor-borda);
@@ -69,8 +69,8 @@
   flex-wrap: wrap;
   margin-bottom: 28px;
 }
-.subtitulo, .suave { color: var(--cor-texto-suave); }
-.subtitulo { margin: 6px 0 0; font-size: 14px; }
+.escola .subtitulo, .suave { color: var(--cor-texto-suave); }
+.escola .subtitulo { margin: 6px 0 0; font-size: 14px; }
 p.suave { font-size: 14px; margin: 6px 0 0; }
 td.suave { font-size: 13px; }
 
