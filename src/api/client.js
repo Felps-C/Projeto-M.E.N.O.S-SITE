@@ -1,7 +1,8 @@
 // Único lugar que conhece o endereço da API.
-// Em desenvolvimento usa "/api" (proxy do Vite). Em produção, defina VITE_API_URL.
-//const BASE = 'http://192.168.1.8:8080'
-const BASE = '/api';
+// Em desenvolvimento usa "/api" (proxy do Vite). Em produção (Vercel), defina VITE_API_URL com o endereço
+// público da API, ex.: https://nome.trycloudflare.com (sem barra no final). O valor é lido na hora do build:
+// depois de mudar a variável, faça um novo deploy.
+const BASE = (import.meta.env.VITE_API_URL || '/api').replace(/\/+$/, '');
 export class ApiError extends Error {
   constructor(message, status) {
     super(message);
